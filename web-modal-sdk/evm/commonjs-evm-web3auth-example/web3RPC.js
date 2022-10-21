@@ -39,23 +39,20 @@ const rpc = (() => {
   
     const sendTransaction = async (provider) => {
       const web3 = new Web3(provider);
-  
-      // Get user's Ethereum public address
-      const address = (await web3.eth.getAccounts())[0];
-  
-      const destination = "0x7aFac68875d2841dc16F1730Fba43974060b907A";
-  
-      // Convert 1 ether to wei
-      const amount = web3.utils.toWei(0.001);
-  
-      // Submit transaction to the blockchain and wait for it to be mined
-      const receipt = await web3.eth.sendTransaction({
-        from: fromAddress,
-        to: destination,
-        value: amount,
-        maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-        maxFeePerGas: "6000000000000", // Max fee per gas
-      });
+
+        const fromAddress = (await web3.eth.getAccounts())[0];
+
+        const destination = "0x7aFac68875d2841dc16F1730Fba43974060b907A";
+        const amount = web3.utils.toWei(1); // Convert 1 ether to wei
+
+        // Submit transaction to the blockchain and wait for it to be mined
+        const receipt = await web3.eth.sendTransaction({
+          from: fromAddress,
+          to: destination,
+          value: amount,
+          maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
+          maxFeePerGas: "6000000000000", // Max fee per gas
+        });
   
       return receipt;
     }
